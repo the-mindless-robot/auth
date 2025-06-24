@@ -11,12 +11,15 @@ const config = {
   providers: [
     Credentials({
       async authorize(credentials) {
+        console.log("AUTH CREDENTIALS", credentials);
         const { email, password } = credentials as {
           email: string;
           password: string;
         };
 
         const user = await prisma.users.findUnique({ where: { email } });
+
+        console.log("AUTH USER", user);
         if (!user || !user.hashed_password) return null;
 
         const isValid = await bcrypt.compare(password, user.hashed_password);
@@ -24,7 +27,6 @@ const config = {
       },
     }),
   ],
-  callbacks: {},
 };
 
 // next auth defaults

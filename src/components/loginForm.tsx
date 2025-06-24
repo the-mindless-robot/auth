@@ -1,10 +1,11 @@
-import { Label } from "@radix-ui/react-label";
+import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { login } from "@/lib/actions";
 
 export default function LoginForm() {
   return (
-    <form className="max-w-sm mx-auto mt-10 space-y-4">
+    <form action={login} className="max-w-sm mx-auto mt-10 space-y-4">
       <div>
         <Label htmlFor="email">Email</Label>
         <Input
