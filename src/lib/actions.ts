@@ -19,7 +19,6 @@ export async function login(formData: FormData) {
     });
   } catch (error) {
     if (error instanceof AuthError) {
-      console.log("GOT IT:", error);
       switch (error.type) {
         case "CredentialsSignin": {
           return {
