@@ -6,9 +6,27 @@ export const nextAuthEdgeConfig = {
   },
   callbacks: {
     authorized: ({ auth, request }) => {
-      console.log("MID");
+      const isProtected = request.nextUrl.pathname.startsWith("/app");
 
-      return !!auth;
+      if (isProtected && !auth) {
+        return false;
+      }
+      if (request.nextUrl.pathname === "/login" && auth) {
+        return Response.redirect(new URL("/app", request.nextUrl.origin));
+      }
+      if (request.nextUrl.pathname === "/register" && auth) {
+        return Response.redirect(new URL("/app", request.nextUrl.origin));
+      }
+      if (!isProtected) {
+        return true;
+      }
+      if (isProtected && auth) {
+        return true;
+      }
+
+      return false;
+
+      // return !!auth;
     },
     //  jwt: async ({ token, user, trigger }) => {
     //    if (user) {
