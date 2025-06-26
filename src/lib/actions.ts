@@ -7,10 +7,6 @@ export async function login(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  if (!email || !password) {
-    return { error: "Email and password are required." };
-  }
-
   try {
     await signIn("credentials", {
       email,
@@ -21,14 +17,12 @@ export async function login(formData: FormData) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin": {
-          return {
-            message: "Invalid credentials.",
-          };
+          console.log("Error. Invalid credentials.", error);
+          // Handle invalid credentials
+          break;
         }
         default: {
-          return {
-            message: "Error. Could not sign in.",
-          };
+          console.log("Error. Could not sign in.", error);
         }
       }
     }
