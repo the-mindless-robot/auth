@@ -29,21 +29,15 @@ export const nextAuthEdgeConfig = {
 
       // return !!auth;
     },
-    //  jwt: async ({ token, user, trigger }) => {
-    //    if (user) {
-    //      // on sign in
-    //      token.userId = user.id;
-    //      token.email = user.email!;
+    jwt: async ({ token, user, trigger }) => {
+      console.log("JWT CALLBACK", { token, user, trigger });
+      return token;
+    },
+    session: ({ session, token }) => {
+      console.log("SESSION CALLBACK", { session, token });
 
-    //    }
-
-    //    return token;
-    //  },
-    //  session: ({ session, token }) => {
-    //    session.user.id = token.userId;
-
-    //    return session;
-    //  },
+      return session;
+    },
   },
   providers: [],
 } satisfies NextAuthConfig;

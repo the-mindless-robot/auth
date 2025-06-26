@@ -1,7 +1,13 @@
 import { prisma } from "@/lib/prisma";
 
 export default async function App() {
-  const users = await prisma.users.findMany({});
+  const users = await prisma.users.findMany({
+    select: {
+      xata_id: true,
+      email: true,
+      xata_createdat: true,
+    },
+  });
   console.log("USERS", users);
 
   return (
