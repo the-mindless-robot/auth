@@ -7,6 +7,7 @@ export const nextAuthEdgeConfig = {
   },
   callbacks: {
     authorized: ({ auth, request }) => {
+      console.log("AUTHORIZED CALLBACK", { auth, request });
       const isProtected = request.nextUrl.pathname.startsWith("/app");
 
       if (isProtected && !auth) {
