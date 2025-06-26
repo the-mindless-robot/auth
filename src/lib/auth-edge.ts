@@ -1,4 +1,5 @@
 import { NextAuthConfig } from "next-auth";
+import { NextResponse } from "next/server";
 
 export const nextAuthEdgeConfig = {
   pages: {
@@ -12,10 +13,10 @@ export const nextAuthEdgeConfig = {
         return false;
       }
       if (request.nextUrl.pathname === "/login" && auth) {
-        return Response.redirect(new URL("/app", request.nextUrl.origin));
+        return NextResponse.redirect(new URL("/app", request.nextUrl.origin));
       }
       if (request.nextUrl.pathname === "/register" && auth) {
-        return Response.redirect(new URL("/app", request.nextUrl.origin));
+        return NextResponse.redirect(new URL("/app", request.nextUrl.origin));
       }
       if (!isProtected) {
         return true;
